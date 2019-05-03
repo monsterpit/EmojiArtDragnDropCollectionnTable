@@ -15,7 +15,7 @@ class EmojiArtTableViewController: UITableViewController {
     //this model doesnt have enough stuff in it for sections but you could imagine it would
     // what if we had recently created documents ,recently deleted , other kinds of sections
     
-    var emojiArtDocument = ["One","Two","Three"]
+    var emojiArtDocuments = ["One","Two","Three"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +37,7 @@ class EmojiArtTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
        // return 0
-        return emojiArtDocument.count
+        return emojiArtDocuments.count
     }
 
     
@@ -45,13 +45,26 @@ class EmojiArtTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DocumentCell", for: indexPath)
 
         // Configure the cell...
-        cell.textLabel?.text = emojiArtDocument[indexPath.row]
+        cell.textLabel?.text = emojiArtDocuments[indexPath.row]
         
         
         return cell
     }
 
 
+    
+    @IBAction func newEmojiArt(_ sender: UIBarButtonItem) {
+        
+        // This madeUnique is in Utilities.swift
+        emojiArtDocuments += ["Untitled".madeUnique(withRespectTo: emojiArtDocuments)]
+        
+        tableView.reloadData()
+    }
+    
+    
+    
+    
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -98,3 +111,21 @@ class EmojiArtTableViewController: UITableViewController {
     */
 
 }
+
+
+
+
+/*
+ When we add buttons to top areas of a navigation controller
+ we dont add regular buttons
+ It will let you do it but dont do it
+ 
+ You put barButton
+ because its in a little navigation bar at the top  that's the button you want
+ you get all kind of messed up if you use the wrong button there
+ 
+ there are some predefined buttons up there like a camera , like save  , and there also a add
+ And I strongly recommend using one of these predefined one's if it describes what you are doing because user will be used to that icon or that image doing what you expect right there
+ 
+ Normal this just a normal bar button and we can just ctrl drag to it to create an outlet
+ */

@@ -67,23 +67,48 @@ class EmojiArtTableViewController: UITableViewController {
     
     /*
     // Override to support conditional editing of the table view.
+     //This say where you are allowed to delete this row and now the default is yes
+     // So you dont actually need to implement below method if you allow all rows to be deleted
+     // this is only way to prevent deletion from happening here
+     //So we gonna allow all of our rows to be deleted here so we wont uncomment this implement method
+     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
     */
 
+    
     /*
+     but why aint delete still working because you also have to implement below method
+     commit editingStyle either delete or insert you have to commit that , that means you have to commit it to your model
+     So it is really easy to do it has
+     if .delete or if .insert
+     this insert is kind of a UITableView for adding we dont need that because we have a plus button
+     
+ */
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
+            emojiArtDocuments.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            
+            /*            emojiArtDocuments.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+             both has to be in perfect sync
+             If dont have this perfectly sync you will get a crash  when this happens and it will say something like number of rows in the table did not match when i went to update the rows
+             //in other words it's saying your model and table is out of sync or dont match up
+             So it is easy to get it out of sync
+             
+             //this is using tableView.deleteRows instead of reload table
+ */
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
+
 
     /*
     // Override to support rearranging the table view.
